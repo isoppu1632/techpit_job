@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_01_053020) do
+ActiveRecord::Schema.define(version: 2019_06_02_060036) do
+
+  create_table "entries", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "job_id"
+    t.text "messages"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_entries_on_job_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "image_url"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
