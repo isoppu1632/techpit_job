@@ -33,8 +33,8 @@
         </div>
         <p class="share-url"><a onclick="clipURL()" class="url-text">URL</a><i class="far fa-copy"></i></p>
       </div>
-      <% if user_signed_in? %> <!-- ③：ログインしている場合 -->
-            <% if @job.user_id == current_user.id %> <!-- ④：自分の作成した求人だった場合 -->
+      <% if user_signed_in? %>
+            <% if @job.user_id == current_user.id %>
               <div class="job-show-comment">
                 <h2 class="job-list-title">応募一覧</h2>
                 <ul class="list-group">
@@ -48,12 +48,12 @@
                   <% end %>
                 </ul>
               </div>
-           <% else -%> <!-- ④：自分の作成した求人でない場合 -->
-            <% if current_user.entries.where(job_id: @job.id).present? %><!-- ⑤すでに応募している場合 -->
+           <% else -%>
+            <% if current_user.entries.where(job_id: @job.id).present? %>
               <div class="intro-button text-center">
               <a href="javascript:void(0)" class="btn btn-xl">すでに応募しています</a>
             </div>
-            <% else %><!-- ⑤まだ応募していない場合 -->
+            <% else %>
               <%= form_with model: [@job, @job.entries.new] do |f| %>
                 <%= f.hidden_field :job_id, value: @job.id %>
                 <div class="form-group form-message">
@@ -64,10 +64,10 @@
                   <%= f.submit "応募する", class: "btn btn-xl" %>
                 </div>
               <% end %>
-            <% end %><!-- ⑤ -->
-           <% end %><!-- ④ -->
+            <% end %>
+           <% end %>
 
-    <% else %><!-- ③：ログインしていない場合 -->
+    <% else %>
       <div class="show-login text-center">
         <div class="intro-button text-center">
           <a href="/users/sign_in" class="btn btn-xl">応募する</a>
@@ -83,8 +83,7 @@
         <p>※ Twitterで応募した場合は「」で「すべてのユーザーからダイレクトメッセージを受信する」 にチェックを入れてください。</p>
         </ul>
       </div>
-      <% end %><!-- ③ -->
-
+      <% end %>
     </div>
   </div>
 </div>
